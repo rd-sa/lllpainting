@@ -10,17 +10,21 @@
             margin: 0;
             padding: 0;
             background-color: #f7f7f7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         header {
             background-color: #4CAF50;
-            padding: 20px;
+            padding: 10px;
             color: white;
             text-align: center;
         }
 
         header img {
-            width: 150px;  /* Adjust the logo size */
+            width: 150px;
             height: auto;
             display: block;
             margin: 0 auto 10px;
@@ -30,7 +34,8 @@
             margin: 0;
         }
 
-        section {
+        main {
+            flex: 1;
             padding: 50px 20px;
         }
 
@@ -41,7 +46,9 @@
             padding: 30px;
             text-align: center;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 40px auto;
+            padding-left: 40px;
+            padding-right: 40px;
         }
 
         .quote-section h2 {
@@ -67,37 +74,37 @@
         }
 
         .gallery {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            justify-content: center;
+            padding: 20px;
+            max-width: 95vw;
+            margin: auto;
+            overflow: hidden;
         }
 
         .gallery img {
-            width: 45vw; /* Default size for larger screens */
-            max-width: 500px; /* Ensures the image doesn't get too large */
+            width: 100%;
             height: auto;
+            object-fit: cover;
+            border-radius: 8px;
             opacity: 0;
-            transform: translateX(-100px);
-            transition: all 1s ease-in-out;
+            transform: scale(0.9);
+            transition: all 0.8s ease-in-out;
         }
 
         .gallery img.visible {
             opacity: 1;
-            transform: translateX(0);
+            transform: scale(1);
         }
 
-        /* Media query for small screens (phones) */
-        @media (max-width: 600px) {
-            .gallery img {
-                width: 70vw; /* Increase image width on smaller screens */
+        @media (max-width: 800px) {
+            .gallery {
+                grid-template-columns: 1fr;
             }
-        }
-
-        /* Media query for medium screens (tablets) */
-        @media (max-width: 900px) {
-            .gallery img {
-                width: 55vw; /* Slightly smaller than on mobile, larger than on desktop */
+            .quote-section {
+                padding-left: 20px;
+                padding-right: 20px;
             }
         }
 
@@ -106,57 +113,47 @@
             color: white;
             text-align: center;
             padding: 20px;
-            position: fixed;
-            bottom: 0;
             width: 100%;
-        }
-
-        footer p {
-            margin: 0;
+            margin-top: auto;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <!-- Using a random image from Picsum for the logo placeholder -->
     <img src="https://picsum.photos/150/150?random=1" alt="Triple L Painting Logo">
-    <h1>Welcome to Triple L Painting</h1>
+    <h1>Triple L Painting</h1>
     <p>Your trusted painting professionals</p>
 </header>
 
-<section>
-    <div class="quote-section">
+<main>
+    <section class="quote-section">
         <h2>Request a Free Quote!</h2>
         <p>Need a fresh coat of paint? Let us know how we can help with your next project. Contact us to get a free quote!</p>
         <div class="contact-info">
             <p>Call us at <a href="tel:+1234567890">+1 (234) 567-890</a></p>
             <p>Or email us at <a href="mailto:contact@triplelpainting.com">contact@triplelpainting.com</a></p>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="gallery">
-    <!-- Using random images from Picsum for the gallery -->
-    <img src="https://picsum.photos/300/200?random=2" alt="Painting 1" class="gallery-image">
-    <img src="https://picsum.photos/300/200?random=3" alt="Painting 2" class="gallery-image">
-    <img src="https://picsum.photos/300/200?random=4" alt="Painting 3" class="gallery-image">
-    <img src="https://picsum.photos/300/200?random=5" alt="Painting 4" class="gallery-image">
-</section>
+    <section class="gallery">
+        <img src="https://picsum.photos/800/500?random=2" alt="Painting 1" class="gallery-image">
+        <img src="https://picsum.photos/800/500?random=3" alt="Painting 2" class="gallery-image">
+        <img src="https://picsum.photos/800/500?random=4" alt="Painting 3" class="gallery-image">
+        <img src="https://picsum.photos/800/500?random=5" alt="Painting 4" class="gallery-image">
+    </section>
+</main>
 
 <footer>
     <p>&copy; 2025 Triple L Painting | All rights reserved</p>
 </footer>
 
 <script>
-    // JavaScript for scroll-based fade and slide-in effect
     window.addEventListener('scroll', function() {
         const images = document.querySelectorAll('.gallery-image');
         images.forEach(image => {
             const imageTop = image.getBoundingClientRect().top;
             const windowHeight = window.innerHeight;
-
-            // When the image is within the viewport
             if (imageTop < windowHeight - 100) {
                 image.classList.add('visible');
             }
