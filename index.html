@@ -18,7 +18,7 @@
 
         header {
             background-color: #4CAF50;
-            padding: 10px;
+            padding: 20px;
             color: white;
             text-align: center;
         }
@@ -98,11 +98,68 @@
             transform: scale(1);
         }
 
+        .reviews-section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            max-width: 800px;
+            margin: 40px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .reviews-container {
+            display: flex;
+            width: 200%;
+            transition: transform 1s ease-in-out;
+        }
+
+        .reviews-set {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            flex-shrink: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .reviews-set.active {
+            opacity: 1;
+        }
+
+        .review {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .review p {
+            font-style: italic;
+            color: #555;
+        }
+
+        .review strong {
+            display: block;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .stars {
+            color: gold;
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
         @media (max-width: 800px) {
             .gallery {
                 grid-template-columns: 1fr;
             }
-            .quote-section {
+            .quote-section, .reviews-section {
                 padding-left: 20px;
                 padding-right: 20px;
             }
@@ -122,7 +179,7 @@
 
 <header>
     <img src="https://picsum.photos/150/150?random=1" alt="Triple L Painting Logo">
-    <h1>Triple L Painting</h1>
+    <h1>Welcome to Triple L Painting</h1>
     <p>Your trusted painting professionals</p>
 </header>
 
@@ -142,11 +199,33 @@
         <img src="https://picsum.photos/800/500?random=4" alt="Painting 3" class="gallery-image">
         <img src="https://picsum.photos/800/500?random=5" alt="Painting 4" class="gallery-image">
     </section>
+
+    <section class="reviews-section">
+        <h2>Customer Reviews</h2>
+        <div class="reviews-container">
+            <div class="reviews-set active">
+                <div class="review"><p>"Amazing service! Highly recommend."</p><strong>- Alex R.</strong><div class="stars">★★★★★</div></div>
+                <div class="review"><p>"Fast, professional, and affordable."</p><strong>- Lisa M.</strong><div class="stars">★★★★★</div></div>
+                <div class="review"><p>"Great attention to detail."</p><strong>- Chris W.</strong><div class="stars">★★★★★</div></div>
+            </div>
+            <div class="reviews-set">
+                <div class="review"><p>"Love my newly painted home!"</p><strong>- Tina K.</strong><div class="stars">★★★★★</div></div>
+                <div class="review"><p>"Top-notch quality work."</p><strong>- Dave P.</strong><div class="stars">★★★★★</div></div>
+                <div class="review"><p>"Would hire them again!"</p><strong>- Emma G.</strong><div class="stars">★★★★★</div></div>
+            </div>
+        </div>
+    </section>
 </main>
 
-<footer>
-    <p>&copy; 2025 Triple L Painting | All rights reserved</p>
-</footer>
+<script>
+    let currentIndex = 0;
+    setInterval(() => {
+        const sets = document.querySelectorAll('.reviews-set');
+        sets.forEach(set => set.classList.remove('active'));
+        sets[currentIndex].classList.add('active');
+        currentIndex = (currentIndex + 1) % sets.length;
+    }, 10000);
+</script>
 
 <script>
     window.addEventListener('scroll', function() {
@@ -161,5 +240,8 @@
     });
 </script>
 
+<footer>
+    <p>&copy; 2025 Triple L Painting | All rights reserved</p>
+</footer>
 </body>
 </html>
