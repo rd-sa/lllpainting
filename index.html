@@ -121,12 +121,9 @@
             flex-direction: column;
             width: 50%;
             flex-shrink: 0;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
         }
 
         .reviews-set.active {
-            opacity: 1;
         }
 
         .review {
@@ -218,16 +215,6 @@
 </main>
 
 <script>
-    let currentIndex = 0;
-    setInterval(() => {
-        const sets = document.querySelectorAll('.reviews-set');
-        sets.forEach(set => set.classList.remove('active'));
-        sets[currentIndex].classList.add('active');
-        currentIndex = (currentIndex + 1) % sets.length;
-    }, 10000);
-</script>
-
-<script>
     window.addEventListener('scroll', function() {
         const images = document.querySelectorAll('.gallery-image');
         images.forEach(image => {
@@ -238,6 +225,16 @@
             }
         });
     });
+</script>
+
+<script>
+    let reviewIndex = 0;
+    function slideReviews() {
+        const container = document.querySelector('.reviews-container');
+        reviewIndex = (reviewIndex + 1) % 2; // Toggle between 0 and 1
+        container.style.transform = `translateX(-${reviewIndex * 50}%)`;
+    }
+    setInterval(slideReviews, 10000);
 </script>
 
 <footer>
